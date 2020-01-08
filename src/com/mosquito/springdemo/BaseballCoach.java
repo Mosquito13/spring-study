@@ -18,4 +18,11 @@ public class BaseballCoach implements Coach {
 		return "Xesque: " + fortuneService.getFortune();
 	}
 
+	public void initMethodAnyName() {
+		System.out.println("BaseballCoach init");
+	}
+	
+	public void destroyMethodAnyName() {
+		System.out.println("BaseballCoach destroy");
+	}
 }
