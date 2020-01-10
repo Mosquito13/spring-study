@@ -7,29 +7,26 @@ public class SpringApp {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
-		Coach coach = context.getBean("hockeyCoach", Coach.class);
+		Coach coach1 = context.getBean("hockeyCoach", Coach.class);
+		Coach coach2 = context.getBean("hockeyCoach", Coach.class);
 		
-		System.out.println("\n== Constructor injection ==");
-		System.out.println(coach.getDailyWorkout());
-		System.out.println(coach.getDailyFortune());
+		System.out.println("\n== Singleton Scope ==");
+		System.out.println(coach1.getDailyWorkout());
+		System.out.println(coach1.getDailyFortune());
+		System.out.println("Coach 1: " + coach1);
+		System.out.println("Coach 2: " + coach2);
+		System.out.println("Are equal: " + (coach1 == coach2));
+		
 
-		coach = context.getBean("tennisCoach", Coach.class);
+		coach1 = context.getBean("soccerCoach", Coach.class);
+		coach2 = context.getBean("soccerCoach", Coach.class);
 		
-		System.out.println("\n== Setter injection ==");
-		System.out.println(coach.getDailyWorkout());
-		System.out.println(coach.getDailyFortune());
-		
-		coach = context.getBean("soccerCoach", Coach.class);
-		
-		System.out.println("\n== Method injection ==");
-		System.out.println(coach.getDailyWorkout());
-		System.out.println(coach.getDailyFortune());
-		
-		coach = context.getBean("trackCoach", Coach.class);
-		
-		System.out.println("\n== Field injection ==");
-		System.out.println(coach.getDailyWorkout());
-		System.out.println(coach.getDailyFortune());
+		System.out.println("\n== Prototype Scope ==");
+		System.out.println(coach1.getDailyWorkout());
+		System.out.println(coach1.getDailyFortune());
+		System.out.println("Coach 1: " + coach1);
+		System.out.println("Coach 2: " + coach2);
+		System.out.println("Are equal: " + (coach1 == coach2));
 		
 		context.close();
 	}
