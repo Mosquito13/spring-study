@@ -7,29 +7,27 @@ import org.hibernate.cfg.Configuration;
 import com.mosquito.springstudy.entity.Course;
 import com.mosquito.springstudy.entity.Instructor;
 import com.mosquito.springstudy.entity.InstructorDetail;
+import com.mosquito.springstudy.entity.Review;
+import com.mosquito.springstudy.entity.Student;
 
-public class ReadDemo {
+public class DeleteDemo {
 
 	public static void main(String[] args) {
+
 		SessionFactory factory = new Configuration().configure().addAnnotatedClass(Instructor.class)
-				.addAnnotatedClass(InstructorDetail.class).addAnnotatedClass(Course.class).buildSessionFactory();
-		
+				.addAnnotatedClass(InstructorDetail.class).addAnnotatedClass(Course.class)
+				.addAnnotatedClass(Review.class).addAnnotatedClass(Student.class).buildSessionFactory();
+
 		Session session = factory.getCurrentSession();
-		
+
 		session.beginTransaction();
+
+		Course c = session.get(Course.class, 12);
 		
-		Instructor i = session.get(Instructor.class, 1);
-		
-		System.out.println("\nInstructor:\n" + i);
-		System.out.println("\nCourses: ");
-		
-		for (Course c : i.getCourses()) {
-			System.out.println(c);
-		}
+		session.delete(c);
 		
 		session.getTransaction().commit();
-		
-		session.close();
+
 		factory.close();
 	}
 

@@ -26,7 +26,7 @@ public class InstructorDetail {
 
 	@OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
 	private Instructor instructor;
-	
+
 	public InstructorDetail() {
 		// TODO Auto-generated constructor stub
 	}
@@ -62,7 +62,8 @@ public class InstructorDetail {
 
 	@Override
 	public String toString() {
-		return "InstructorDetail [id=" + id + ", youtubeChannel=" + youtubeChannel + ", hobby=" + hobby + "]";
+		return "InstructorDetail [id=" + id + ", youtubeChannel=" + youtubeChannel + ", hobby=" + hobby
+				+ ", instructor=" + instructor + "]";
 	}
 
 }
