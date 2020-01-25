@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +16,10 @@
 
 	<div class="container">
 		<div class="content">
+
+			<input type="button" value="Add customer" class="add-button"
+				onclick="window.location.href = 'add'; return false;" />
+
 			<table>
 				<tr>
 					<th>First name</th>
