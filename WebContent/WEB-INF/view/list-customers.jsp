@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,13 +25,21 @@
 					<th>First name</th>
 					<th>Last name</th>
 					<th>E-mail</th>
+					<th>Action</th>
 				</tr>
 
-				<c:forEach var="customer" items="#{customers}">
+				<c:forEach var="customer" items="${customers}">
+					<c:url var="updateLink" value="/customer/update">
+						<c:param name="customerId" value="${customer.id}" />
+					</c:url>
+
 					<tr>
 						<td>${customer.firstName}</td>
 						<td>${customer.lastName}</td>
 						<td>${customer.email}</td>
+						<td>
+							<a href="${updateLink}">Update</a>
+						</td>
 					</tr>
 				</c:forEach>
 

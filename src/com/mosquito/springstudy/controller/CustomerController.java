@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mosquito.springstudy.entity.Customer;
 import com.mosquito.springstudy.service.CustomerService;
@@ -29,7 +30,7 @@ public class CustomerController {
 	public String addCustomer(Model model) {
 		model.addAttribute("customer", new Customer());
 		
-		return "add-customer";
+		return "customer-form";
 	}
 	
 	@PostMapping("/save")
@@ -37,5 +38,12 @@ public class CustomerController {
 		customerService.saveCustomer(customer);
 		
 		return "redirect:/customer/list";
+	}
+	
+	@GetMapping("/update")
+	public String updateCustomer(@RequestParam("customerId") int id, Model model) {
+		model.addAttribute("customer", customerService.getCustomer(id));
+		
+		return "customer-form";
 	}
 }

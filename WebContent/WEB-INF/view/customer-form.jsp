@@ -19,8 +19,10 @@
 	<div class="container">
 		<h3>Add Customer</h3>
 
-		<form:form action="save" modelAttribute="customer"
-			method="POST">
+		<form:form action="save" modelAttribute="customer" method="POST">
+
+			<form:hidden path="id" />
+
 			<table>
 				<tbody>
 					<tr>
