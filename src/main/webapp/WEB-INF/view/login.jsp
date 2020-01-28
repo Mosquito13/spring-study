@@ -39,11 +39,21 @@ html, body {
 .message {
 	padding: 1rem;
 	margin: 1rem 1rem 0 1rem;
-	color: darkred;
-	border: 2px solid darkred;
+	border: 2px solid;
 	border-radius: 5px;
-	background-color: darksalmon;
 	font-weight: 600;
+}
+
+.message.error {
+	border-color: darkred;
+	background-color: darksalmon;
+	color: darkred;
+}
+
+.message.info {
+	border-color: darkolivegreen;
+	background-color: lightgreen;
+	color: darkolivegreen;
 }
 
 .form-control:first-of-type {
@@ -79,11 +89,16 @@ html, body {
 	<div class="container">
 		<div class="form-group">
 			<div class="title">
-				<span>Login</span>
+				<span>Sign in</span>
 			</div>
 			<c:if test="${param.error != null}">
-			<div class="message">
-				<span>Sorry, incorrect credentials.</span>
+			<div class="message error">
+				<span>Sorry, incorrect credentials</span>
+			</div>
+			</c:if>
+			<c:if test="${param.logout != null}">
+			<div class="message info">
+				<span>Successfully logged out</span>
 			</div>
 			</c:if>
 			<form:form action="${pageContext.request.contextPath}/authenticate" method="POST">
