@@ -17,23 +17,27 @@ import com.mosquito.springstudy.entity.Student;
 public class StudentRestController {
 
 	private List<Student> students;
-	
+
 	@PostConstruct
 	public void loadData() {
 		students = new ArrayList<>();
-		
+
 		students.add(new Student("xesque", "bresque"));
 		students.add(new Student("cresque", "dresque"));
 	}
-	
+
 	@GetMapping("/students")
 	public List<Student> getStudents() {
 		return students;
 	}
-	
+
 	@GetMapping("/students/{studentId}")
 	public Student getStudent(@PathVariable int studentId) {
+		if (students.size() <= studentId || studentId < 0) {
+			throw new StudentNotFoundException("Student not found: " + studentId);
+		}
+
 		return students.get(studentId);
 	}
-	
+
 }
