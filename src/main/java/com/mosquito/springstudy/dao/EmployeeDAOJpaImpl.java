@@ -4,44 +4,39 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mosquito.springstudy.entity.Employee;
 
 @Repository
-public class EmployeeDAOHibernateImpl implements EmployeeDAO {
+public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
 	@Autowired
 	private EntityManager entityManager;
-
+	
 	@Override
 	public List<Employee> findAll() {
-		Session session = entityManager.unwrap(Session.class);
-
-		return session.createQuery("from Employee", Employee.class).getResultList();
+		return entityManager.createQuery("from Employee", Employee.class).getResultList();
 	}
 
 	@Override
 	public Employee findById(int id) {
-		Session session = entityManager.unwrap(Session.class);
-		
-		return session.get(Employee.class, id);
+		return entityManager.find(Employee.class, id);
 	}
 
 	@Override
 	public void save(Employee employee) {
-		Session session = entityManager.unwrap(Session.class);
+		Employee e = entityManager.merge(employee);
 		
-		session.saveOrUpdate(employee);
+		employee.setId(e.getId());
 	}
 
 	@Override
 	public void deleteById(int id) {
-		Session session = entityManager.unwrap(Session.class);
+		Employee e = entityManager.find(Employee.class, id);
 		
-		session.delete(this.findById(id));
+		entityManager.remove(e);
 	}
 
 }
